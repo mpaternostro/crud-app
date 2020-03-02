@@ -1,7 +1,7 @@
 import React from 'react';
-import {UserRow} from './UserRow.js';
+import UserRow from './UserRow.js';
 
-export function UserTable(props) {
+export default function UserTable(props) {
     return (
         <table>
             <thead>
@@ -14,7 +14,10 @@ export function UserTable(props) {
             <tbody>
                 {props.users.length > 0 ? (
                     props.users.map(user => (
-                        <UserRow key={user.id} name={user.name} username={user.username} />
+                        <UserRow
+                        key={user.id} user={user}
+                        editUser={props.editUser} deleteUser={props.deleteUser}
+                        />
                     ))
                 ) : (
                     <tr>

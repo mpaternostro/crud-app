@@ -1,13 +1,17 @@
 import React from 'react';
 
-export function UserRow(props){
+export default function UserRow(props){
     return (
         <tr className='table-body'>
-            <td>{props.name}</td>
-            <td>{props.username}</td>
+            <td>{props.user.name}</td>
+            <td>{props.user.username}</td>
             <td>
-                <button id='edit-button' className='user-action-button'>Edit</button>
-                <button id='delete-button' className='user-action-button'>Delete</button>
+                <button id='edit-button' className='user-action-button'
+                onClick={() => props.editUser(props.user)}
+                >Edit</button>
+                <button id='delete-button' className='user-action-button'
+                onClick={() => props.deleteUser(props.user.id)}
+                >Delete</button>
             </td>
         </tr>
     )
