@@ -1,9 +1,11 @@
 import React from 'react';
 
 export default function EditUserForm(props){
-    // const initialFormState = { id: props.user.id, name: props.user.name, username: props.user.username };
-    // const [user, setUser] = React.useState(initialFormState);
-    const [user, setUser] = React.useState(props.user);
+    const [user, setUser] = React.useState(props.currentUser);
+
+    React.useEffect(() => {
+        setUser(props.currentUser);
+    }, [props.currentUser])
 
     function handleInputChange(event){
         const { name, value } = event.target;
@@ -13,8 +15,7 @@ export default function EditUserForm(props){
     function handleSubmitForm(event){
         event.preventDefault();
         if (!user.name || !user.username) return;
-        props.editUser(user);
-        setUser(initialFormState);
+        props.updateUser(user);
     }
 
     return (
@@ -30,7 +31,8 @@ export default function EditUserForm(props){
                 <input id='username' type='text' name='username' value={user.username}
                 onChange={handleInputChange}/>
             </h3>
-            <button>Add New User</button>
+            <button>Update user</button>
+            <button onClick={() => props.setEditing(false) }>Cancel</button>
         </form>
     )
 }
